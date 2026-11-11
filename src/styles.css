@@ -234,3 +234,18 @@ textarea { flex: 1; min-width: 0; padding: 12px 12px; border: 0; outline: none; 
 .resalte, .codigo-in textarea, .gutter, .solucion pre, .pista pre { font-variant-ligatures: none; font-feature-settings: "liga" 0, "calt" 0; }
 
 :root { color-scheme: light dark; }
+
+/* ---------- Tamaño del editor ---------- */
+.editor { --ed-fs: 14px; }
+@media (pointer: coarse) { .editor { --ed-fs: 16px; } }
+.editor .gutter, .editor .resalte, .editor .codigo-in textarea { font-size: var(--ed-fs); line-height: calc(var(--ed-fs) * 1.6); }
+.editor .gl { height: calc(var(--ed-fs) * 1.6); }
+.editor-grande .codigo-in { min-height: 420px; }
+.editor-grande .gutter { min-height: 420px; }
+.pagina.ancha { max-width: 1100px; }
+.ed-barra { display: flex; align-items: center; gap: 8px; margin: 0 0 8px; font-size: 0.8rem; font-weight: 800; color: var(--texto-2); text-transform: uppercase; letter-spacing: 0.4px; }
+.ed-barra span { margin-right: 2px; }
+.mini { min-width: 44px; height: 36px; padding: 0 12px; border-radius: 10px; border: 2px solid var(--borde); border-bottom-width: 4px; background: var(--tarjeta); color: var(--texto); font: inherit; font-weight: 900; cursor: pointer; text-transform: none; letter-spacing: 0; }
+.mini:active:not(:disabled) { transform: translateY(2px); border-bottom-width: 2px; }
+.mini:disabled { opacity: 0.4; cursor: not-allowed; }
+.mini.activo { border-color: var(--azul); color: var(--azul-sombra); }

@@ -17,6 +17,15 @@ import {
 } from './store.js'
 import { Confeti, Confirmar, Stats, Texto } from './ui.jsx'
 
+function leerVista() {
+  try {
+    const v = JSON.parse(localStorage.getItem('pycamino:vista') || '{}')
+    return { fs: Number(v.fs) || null, grande: !!v.grande }
+  } catch {
+    return { fs: null, grande: false }
+  }
+}
+
 function PanelError({ err, intro }) {
   const [titulo, explicacion] = traducirError(err)
   return (
@@ -173,6 +182,15 @@ export default function Ejercicio({ nivel, indice }) {
   const [celebrar, setCelebrar] = useState(false)
   const [reiniciar, setReiniciar] = useState(false)
   const [pedirSol, setPedirSol] = useState(false)
+  const [vista, setVistaEstado] = useState(leerVista)
+  const setVista = (v) => {
+    setVistaEstado(v)
+    try {
+      localStorage.setItem('pycamino:vista', JSON.stringify(v))
+    } catch {
+      /* sin almacenamiento */
+    }
+  }
   const [solucion, setSolucion] = useState(null)
 
   const pistasVistas = e.pistas[id] || 0
@@ -240,7 +258,7 @@ export default function Ejercicio({ nivel, indice }) {
     )
 
   return (
-    <main className="pagina ej">
+    <main className={'pagina ej' + (vista.grande ? ' ancha' : '')}>
       <header className="barra barra-ej">
         <a className="volver" href="#/" aria-label="Volver al camino">
           ✕
@@ -275,7 +293,14 @@ export default function Ejercicio({ nivel, indice }) {
         </section>
       )}
 
-      <Editor value={codigo} onChange={cambiar} errorLine={lineaError} onRun={correr} bloquearPegar={vioSol && !resuelto} />
+      <div className="ed-barra" role="group" aria-label="Tamaño del editor">
+        <span>Tamaño</span>
+        <button className="mini" aria-label="Letra más pequeña" disabled={(vista.fs || 14) <= 11} onClick={() => setVista({ ...vista, fs: Math.max(11, (vista.fs || (window.matchMedia('(pointer: coarse)').matches ? 16 : 14)) - 2) })}>A−</button>
+        <button className="mini" aria-label="Letra más grande" disabled={(vista.fs || 14) >= 26} onClick={() => setVista({ ...vista, fs: Math.min(26, (vista.fs || (window.matchMedia('(pointer: coarse)').matches ? 16 : 14)) + 2) })}>A+</button>
+        <button className={'mini' + (vista.grande ? ' activo' : '')} aria-pressed={vista.grande} onClick={() => setVista({ ...vista, grande: !vista.grande })}>{vista.grande ? '⤡ Reducir' : '⤢ Agrandar'}</button>
+      </div>
+
+      <Editor fs={vista.fs} grande={vista.grande} value={codigo} onChange={cambiar} errorLine={lineaError} onRun={correr} bloquearPegar={vioSol && !resuelto} />
 
       {estadoPy}
 

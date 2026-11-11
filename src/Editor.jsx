@@ -3,7 +3,7 @@ import { resaltar } from './resaltar.js'
 
 const SIMBOLOS = ['Tab', ':', '(', ')', '[', ']', '{', '}', '"', ',', '=', '#']
 
-export default function Editor({ value, onChange, errorLine, onRun, bloquearPegar }) {
+export default function Editor({ value, onChange, errorLine, onRun, bloquearPegar, fs, grande }) {
   const ta = useRef(null)
   const lineas = value.split('\n').length
 
@@ -45,7 +45,7 @@ export default function Editor({ value, onChange, errorLine, onRun, bloquearPega
   }
 
   return (
-    <div className="editor">
+    <div className={'editor' + (grande ? ' editor-grande' : '')} style={fs ? { '--ed-fs': fs + 'px' } : undefined}>
       <div className="editor-caja">
         <div className="gutter" aria-hidden="true">
           {Array.from({ length: lineas }, (_, i) => (
