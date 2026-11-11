@@ -249,3 +249,6 @@ textarea { flex: 1; min-width: 0; padding: 12px 12px; border: 0; outline: none; 
 .mini:active:not(:disabled) { transform: translateY(2px); border-bottom-width: 2px; }
 .mini:disabled { opacity: 0.4; cursor: not-allowed; }
 .mini.activo { border-color: var(--azul); color: var(--azul-sombra); }
+
+.libre { display: flex; align-items: center; gap: 8px; margin-top: 10px; font-weight: 700; font-size: 14px; color: var(--texto-2); cursor: pointer; }
+.libre input { width: 18px; height: 18px; accent-color: var(--azul); }

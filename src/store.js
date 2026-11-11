@@ -4,7 +4,7 @@ import { idsDeNivel, NIVELES } from './data/levels.js'
 const KEY = 'pycamino:v1'
 const XP_POR_PISTAS = [10, 7, 5, 3]
 
-const vacio = () => ({ xp: 0, racha: { n: 0, ultimo: null }, resueltos: {}, codigo: {}, pistas: {}, vistas: {} })
+const vacio = () => ({ xp: 0, racha: { n: 0, ultimo: null }, resueltos: {}, codigo: {}, pistas: {}, vistas: {}, libre: false })
 
 function cargar() {
   try {
@@ -19,6 +19,7 @@ function cargar() {
       codigo: d.codigo || {},
       pistas: d.pistas || {},
       vistas: d.vistas || {},
+      libre: !!d.libre,
     }
   } catch {
     return vacio()
@@ -74,7 +75,7 @@ export const practicoHoy = (e) => e.racha.ultimo === hoy()
 export const xpPorPistas = (pistas) => XP_POR_PISTAS[Math.min(pistas, XP_POR_PISTAS.length - 1)]
 
 export const nivelCompleto = (e, n) => idsDeNivel(n).every((id) => e.resueltos[id])
-export const nivelDesbloqueado = (e, n) => n === 1 || nivelCompleto(e, n - 1)
+export const nivelDesbloqueado = (e, n) => e.libre || n === 1 || nivelCompleto(e, n - 1)
 export const resueltosDeNivel = (e, n) => idsDeNivel(n).filter((id) => e.resueltos[id]).length
 export const nivelActual = (e) => {
   for (const { n } of NIVELES) if (!nivelCompleto(e, n)) return n
@@ -124,7 +125,12 @@ export function marcarResuelto(id) {
   return xp
 }
 
+export function ponerLibre(v) {
+  estado = { ...estado, libre: !!v }
+  emitir()
+}
+
 export function borrarTodo() {
-  estado = vacio()
+  estado = { ...vacio(), libre: estado.libre }
   emitir()
 }

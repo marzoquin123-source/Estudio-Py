@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { NIVELES, idsDeNivel, POR_ID } from './data/levels.js'
 import {
   borrarTodo,
+  ponerLibre,
   nivelActual,
   nivelCompleto,
   nivelDesbloqueado,
@@ -87,6 +88,10 @@ export default function Mapa() {
         <div className="barra-prog" role="progressbar" aria-valuemin={0} aria-valuemax={60} aria-valuenow={total}>
           <div style={{ width: (total / 60) * 100 + '%' }} />
         </div>
+        <label className="libre">
+          <input type="checkbox" checked={e.libre} onChange={(ev) => ponerLibre(ev.target.checked)} />
+          Elegir cualquier nivel (sin candados)
+        </label>
         <p className="racha-msg">
           {practicoHoy(e)
             ? '¡Ya practicaste hoy! Tu racha está a salvo.'
