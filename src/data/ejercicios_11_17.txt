@@ -99,7 +99,7 @@ return ___
 desc:
 Crear una función que reciba una temperatura y retorne un solo texto:
 "calor" si es 30 o más, "agradable" si es 20 o más, "fresco" si es 10 o más y
-"frio" en cualquier otro caso.
+"frio" (sin tilde, tal cual) en cualquier otro caso.
 demo:
 print(etiqueta_temperatura(25))
 salida:

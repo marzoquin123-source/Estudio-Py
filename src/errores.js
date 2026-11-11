@@ -99,6 +99,17 @@ export function diagnosticos(res, primeraFalla, fn) {
     out.push(`Tu función devolvió ${C('None')}: no está retornando nada. ¿Olvidaste el ${C('return')}?` +
       (a.fn_con_print ? ` Imprimir con ${C('print()')} dentro de la función no es retornar: usa ${C('return')}.` : ''))
   }
+  const o = primeraFalla?.obtenido
+  const e = primeraFalla?.esperado
+  if (o && e && o !== e && /^['"]/.test(o) && /^['"]/.test(e)) {
+    const sinTilde = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '')
+    if (sinTilde(o) === sinTilde(e))
+      out.push('Los dos textos se ven casi iguales, pero se diferencian en las tildes. Este ejercicio espera el texto sin tildes (por ejemplo "dias", no "días"). Para Python, "i" y "í" son letras distintas.')
+    else if (o.toLowerCase() === e.toLowerCase())
+      out.push('Los dos textos son casi iguales, pero se diferencian en mayúsculas y minúsculas. Para Python, "A" y "a" son distintas.')
+    else if (o.replace(/\s+/g, '') === e.replace(/\s+/g, ''))
+      out.push('Los dos textos son casi iguales, pero se diferencian en los espacios (de más o de menos).')
+  }
   if (a.return_en_ciclo?.length)
     out.push(`El ${C('return')} de la línea ${a.return_en_ciclo[0]} está dentro del ciclo: se ejecuta en la primera vuelta y la función termina ahí. Muévelo después del ciclo (con menos sangría).`)
   for (const u of (a.metodo_sin_guardar || []).slice(0, 2))

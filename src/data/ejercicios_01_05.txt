@@ -102,7 +102,7 @@ return len(___(t))
 desc:
 Crear una función que reciba una cantidad de días y retorne un texto con
 las semanas completas y los días que sobran, con el formato
-"<semanas> semanas y <dias> dias".
+"<semanas> semanas y <dias> dias" (escrito sin tilde, tal cual).
 demo:
 print(resumen_dias(30))
 salida:
