@@ -1,0 +1,455 @@
+@ 11-1 | signo | n
+desc:
+Crear una función que reciba un número y retorne el texto "positivo",
+"negativo" o "cero" según corresponda.
+demo:
+print(signo(-4))
+salida:
+negativo
+test: 5 => "positivo"
+test: 0 => "cero"
+test: -100 => "negativo"
+pista: Hay tres casos distintos: usa if, elif y else, y retorna un texto en cada uno.
+pista: Completa la estructura.
+codigo:
+if n ___ 0:
+    return "positivo"
+elif n ___ 0:
+    return "negativo"
+else:
+    return "___"
+
+@ 11-2 | clasificar_nota | nota
+desc:
+Crear una función que reciba una nota de 0 a 100 y retorne la letra: "A" si es
+90 o más, "B" si es 80 o más, "C" si es 70 o más y "D" en cualquier otro caso.
+demo:
+print(clasificar_nota(85))
+salida:
+B
+test: 95 => "A"
+test: 90 => "A"
+test: 70 => "C"
+test: 69 => "D"
+test: 0 => "D"
+pista: Empieza por la condición más exigente (nota >= 90). Con elif, cada condición solo se revisa si las anteriores fueron falsas.
+pista: Completa la estructura: tres condiciones y un else.
+codigo:
+if nota >= ___:
+    return "A"
+elif nota >= ___:
+    return "B"
+elif nota >= ___:
+    return "C"
+else:
+    return "___"
+
+@ 11-3 | es_bisiesto | anio
+desc:
+Crear una función que reciba un año y retorne True si es bisiesto. Un año es
+bisiesto si es divisible entre 4, excepto los divisibles entre 100 que no sean
+divisibles entre 400. Retorna False si no es bisiesto.
+demo:
+print(es_bisiesto(2024))
+salida:
+True
+test: 1900 => False
+test: 2000 => True
+test: 2023 => False
+test: 2100 => False
+pista: Ordena los casos de lo más específico a lo más general: primero 400, luego 100, luego 4.
+pista: Con if-elif-else solo se ejecuta el primer caso verdadero, así que el orden importa.
+codigo:
+if anio % ___ == 0:
+    return True
+elif anio % ___ == 0:
+    return False
+elif anio % ___ == 0:
+    return True
+else:
+    return ___
+
+@ 12-1 | puntos_del_numero | n
+desc:
+Crear una función que reciba un número y sume puntos: 1 punto si es positivo,
+2 puntos si es par y 4 puntos si es mayor que 100. Los puntos se acumulan
+(las tres condiciones se revisan siempre, así que usa if separados, no elif).
+Retorna el total de puntos.
+demo:
+print(puntos_del_numero(200))
+salida:
+7
+test: 7 => 1
+test: -4 => 2
+test: 0 => 2
+test: 101 => 5
+pista: Con if separados Python revisa todas las condiciones; con if-elif-else solo se ejecuta la primera verdadera. Aquí todas deben revisarse.
+pista: Empieza con puntos = 0 y escribe un if por cada regla que sume al acumulador.
+codigo:
+puntos = 0
+if n > ___:
+    puntos += 1
+if n % 2 == ___:
+    puntos += ___
+if n > ___:
+    puntos += 4
+return ___
+
+@ 12-2 | etiqueta_temperatura | t
+desc:
+Crear una función que reciba una temperatura y retorne un solo texto:
+"calor" si es 30 o más, "agradable" si es 20 o más, "fresco" si es 10 o más y
+"frio" en cualquier otro caso.
+demo:
+print(etiqueta_temperatura(25))
+salida:
+agradable
+test: 35 => "calor"
+test: 30 => "calor"
+test: 10 => "fresco"
+test: 9 => "frio"
+test: -5 => "frio"
+pista: Aquí solo debe ocurrir UN resultado, así que usa una cadena if-elif-else.
+pista: Con if separados, 35 grados cumpliría todas las condiciones. Con elif se detiene en la primera verdadera: empieza por la mayor.
+codigo:
+if t >= ___:
+    return "calor"
+elif t >= ___:
+    return "agradable"
+elif t >= ___:
+    return "fresco"
+else:
+    return "___"
+
+@ 12-3 | fizzbuzz | n
+desc:
+Crear una función que reciba un número y retorne "FizzBuzz" si es múltiplo de
+3 y de 5, "Fizz" si solo es múltiplo de 3, "Buzz" si solo es múltiplo de 5, y
+el número convertido a texto en cualquier otro caso.
+demo:
+print(fizzbuzz(9))
+salida:
+Fizz
+test: 15 => "FizzBuzz"
+test: 10 => "Buzz"
+test: 7 => "7"
+test: 30 => "FizzBuzz"
+pista: Un múltiplo de 15 también es múltiplo de 3 y de 5, así que ese caso debe ir primero.
+pista: Después revisa 3, luego 5, y en el else convierte el número con str().
+codigo:
+if n % 15 == 0:
+    return "FizzBuzz"
+elif n % ___ == 0:
+    return "___"
+elif n % ___ == 0:
+    return "___"
+else:
+    return ___(n)
+
+@ 13-1 | suma_hasta | n
+desc:
+Crear una función que reciba un número entero n y retorne la suma de todos los
+enteros desde 1 hasta n. Usa un ciclo while.
+demo:
+print(suma_hasta(5))
+salida:
+15
+test: 1 => 1
+test: 0 => 0
+test: 10 => 55
+test: 100 => 5050
+pista: Necesitas un contador que empiece en 1, un acumulador que empiece en 0 y un while que se repita mientras contador <= n.
+pista: Dentro del ciclo suma el contador al acumulador y SUBE el contador en 1; si no, el ciclo nunca termina.
+codigo:
+i = 1
+total = 0
+while i ___ n:
+    total += ___
+    i += ___
+return total
+
+@ 13-2 | veces_entre_dos | n
+desc:
+Crear una función que reciba un entero n mayor o igual a 1 y retorne cuántas
+veces se puede dividir entre 2 (con //) hasta llegar a 1. Usa un ciclo while.
+demo:
+print(veces_entre_dos(8))
+salida:
+3
+test: 1 => 0
+test: 10 => 3
+test: 100 => 6
+test: 16 => 4
+pista: Cuenta las vueltas del ciclo. En cada vuelta n se reemplaza por n // 2. El ciclo continúa mientras n sea mayor que 1.
+pista: Completa la estructura.
+codigo:
+veces = 0
+while n > ___:
+    n = n // ___
+    veces += ___
+return ___
+
+@ 13-3 | primer_multiplo_mayor | m, limite
+desc:
+Crear una función que reciba un entero positivo m y un número límite, y
+retorne el primer múltiplo de m que sea estrictamente mayor que el límite.
+Usa un ciclo while.
+demo:
+print(primer_multiplo_mayor(7, 30))
+salida:
+35
+test: 5, 5 => 10
+test: 3, 0 => 3
+test: 10, 99 => 100
+test: 4, 16 => 20
+pista: Empieza con el primer múltiplo (m) y avanza de m en m mientras siga siendo menor o igual al límite.
+pista: Completa la estructura.
+codigo:
+k = ___
+while k <= ___:
+    k += ___
+return ___
+
+@ 14-1 | suma_de_digitos | n
+desc:
+Crear una función que reciba un entero n mayor o igual a 0 y retorne la suma
+de sus dígitos. Usa un ciclo while.
+demo:
+print(suma_de_digitos(1234))
+salida:
+10
+test: 7 => 7
+test: 1000 => 1
+test: 999 => 27
+test: 0 => 0
+pista: El último dígito de n es n % 10 y para quitarlo se usa n // 10. Repite mientras n sea mayor que 0.
+pista: Completa la estructura.
+codigo:
+total = 0
+while n > ___:
+    total += n % ___
+    n = n // ___
+return total
+
+@ 14-2 | invertir_numero | n
+desc:
+Crear una función que reciba un entero n mayor o igual a 0 y retorne el número
+con sus dígitos al revés (como entero). Usa un ciclo while.
+demo:
+print(invertir_numero(1234))
+salida:
+4321
+test: 7 => 7
+test: 120 => 21
+test: 1000 => 1
+test: 0 => 0
+test: 90817 => 71809
+pista: Igual que suma_de_digitos, pero en lugar de sumar el último dígito, lo vas pegando a un número nuevo: lo anterior por 10, más el dígito.
+pista: Completa la estructura.
+codigo:
+r = 0
+while n > 0:
+    r = r * ___ + n % ___
+    n = n // ___
+return ___
+
+@ 14-3 | meses_para_meta | ahorro, aporte, meta
+desc:
+Crear una función que reciba el ahorro actual, el aporte mensual (mayor que 0)
+y una meta, y retorne cuántos meses hacen falta para llegar a la meta o
+superarla. Si ya se alcanzó, retorna 0. Usa un ciclo while.
+demo:
+print(meses_para_meta(100, 50, 400))
+salida:
+6
+test: 500, 10, 400 => 0
+test: 0, 100, 100 => 1
+test: 10, 30, 100 => 3
+test: 0, 7, 50 => 8
+pista: Cuenta los meses mientras el ahorro siga siendo menor que la meta. En cada vuelta suma el aporte al ahorro y 1 a los meses.
+pista: Completa la estructura.
+codigo:
+meses = 0
+while ahorro ___ meta:
+    ahorro += ___
+    meses += ___
+return ___
+
+@ 15-1 | suma_pares_hasta | n
+desc:
+Crear una función que reciba un entero n y retorne la suma de los números
+pares desde 1 hasta n (incluyendo n si es par). Usa un ciclo for con range.
+demo:
+print(suma_pares_hasta(10))
+salida:
+30
+test: 1 => 0
+test: 6 => 12
+test: 0 => 0
+test: 9 => 20
+pista: range(1, n + 1) recorre 1, 2, ..., n. Dentro del for usa un if para quedarte solo con los pares.
+pista: Completa la estructura.
+codigo:
+total = 0
+for i in range(1, ___ + 1):
+    if i % 2 == ___:
+        total += ___
+return total
+
+@ 15-2 | factorial | n
+desc:
+Crear una función que reciba un entero n mayor o igual a 0 y retorne su
+factorial (1 × 2 × ... × n). El factorial de 0 es 1.
+demo:
+print(factorial(5))
+salida:
+120
+test: 1 => 1
+test: 0 => 1
+test: 3 => 6
+test: 6 => 720
+pista: Es un acumulador de productos: debe empezar en 1 (no en 0, porque todo por 0 da 0).
+pista: Recorre i desde 1 hasta n y multiplica: producto = producto * i.
+codigo:
+producto = ___
+for i in range(1, ___ + 1):
+    producto = producto * ___
+return producto
+
+@ 15-3 | tabla_de_multiplicar | n
+desc:
+Crear una función que reciba un entero n y retorne una tupla con su tabla de
+multiplicar del 1 al 10 (n*1, n*2, ..., n*10).
+demo:
+print(tabla_de_multiplicar(3))
+salida:
+(3, 6, 9, 12, 15, 18, 21, 24, 27, 30)
+test: 1 => (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+test: 0 => (0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+test: 5 => (5, 10, 15, 20, 25, 30, 35, 40, 45, 50)
+pista: Empieza con una tupla vacía: resultado = (). Dentro del for agrégale cada valor con resultado = resultado + (valor,). La coma dentro del paréntesis es necesaria.
+pista: Completa la estructura.
+codigo:
+resultado = ()
+for i in range(1, ___):
+    resultado = resultado + (n * ___,)
+return ___
+
+@ 16-1 | contar_vocales | texto
+desc:
+Crear una función que reciba un texto y retorne cuántas vocales (a, e, i, o, u)
+tiene, sin importar si están en mayúscula o minúscula.
+demo:
+print(contar_vocales("Murcielago"))
+salida:
+5
+test: "xyz" => 0
+test: "AEIOU" => 5
+test: "" => 0
+test: "Programacion" => 5
+pista: for letra in texto recorre el texto letra por letra. Pasa el texto a minúsculas antes para revisar solo cinco vocales.
+pista: Dentro del for, un if que compare la letra con cada vocal usando or.
+codigo:
+texto = texto.___()
+total = 0
+for letra in texto:
+    if letra == "a" or letra == "e" or letra == "___" or letra == "___" or letra == "___":
+        total += ___
+return total
+
+@ 16-2 | invertir_texto | texto
+desc:
+Crear una función que reciba un texto y retorne el texto al revés.
+demo:
+print(invertir_texto("hola"))
+salida:
+aloh
+test: "a" => "a"
+test: "" => ""
+test: "abc def" => "fed cba"
+pista: Vas construyendo un texto nuevo que empieza vacío (""). La clave está en el orden en que unes cada letra con el resultado: delante o detrás.
+pista: Si pegas cada letra nueva DELANTE del resultado, el texto queda invertido.
+codigo:
+resultado = ""
+for letra in texto:
+    resultado = ___ + ___
+return resultado
+
+@ 16-3 | solo_digitos | texto
+desc:
+Crear una función que reciba un texto y retorne un nuevo texto que solo
+contenga los caracteres que son dígitos, en el mismo orden.
+demo:
+print(solo_digitos("a1b2c3"))
+salida:
+123
+test: "hola" => ""
+test: "tel: 555-12" => "55512"
+test: "2024" => "2024"
+pista: isdigit() dice si un carácter es un dígito. Ve acumulando en un texto que empieza vacío.
+pista: Dentro del for, si el carácter es dígito, pégalo al final del resultado.
+codigo:
+resultado = ""
+for c in texto:
+    if c.___():
+        resultado = ___ + c
+return resultado
+
+@ 17-1 | suma_por_indice | t
+desc:
+Crear una función que reciba una tupla de números y retorne la suma de sus
+elementos recorriéndola por índice (con range y len).
+demo:
+print(suma_por_indice((4, 8, 15, 16)))
+salida:
+43
+test: (1,) => 1
+test: () => 0
+test: (2, 2, 2) => 6
+test: (10, -4, 7) => 13
+pista: range(len(t)) te da los índices 0, 1, 2, ... y t[i] es el elemento en esa posición.
+pista: Completa la estructura.
+codigo:
+total = 0
+for i in range(___(t)):
+    total += t[___]
+return total
+
+@ 17-2 | duplicar_elementos | t
+desc:
+Crear una función que reciba una tupla de números y retorne una tupla nueva
+con cada elemento multiplicado por 2. Recorre la tupla por índice.
+demo:
+print(duplicar_elementos((1, 2, 3)))
+salida:
+(2, 4, 6)
+test: (5,) => (10,)
+test: () => ()
+test: (0, -2) => (0, -4)
+pista: Las tuplas no se pueden modificar: construye una tupla nueva empezando desde una vacía y agregando cada valor con resultado = resultado + (valor,).
+pista: Completa la estructura.
+codigo:
+resultado = ()
+for i in range(len(___)):
+    resultado = resultado + (t[i] * ___,)
+return ___
+
+@ 17-3 | posiciones_mayores | t, limite
+desc:
+Crear una función que reciba una tupla de números y un límite, y retorne una
+tupla con las posiciones (índices) de los elementos mayores que el límite.
+demo:
+print(posiciones_mayores((5, 1, 8, 3, 9), 4))
+salida:
+(0, 2, 4)
+test: (1, 2), 5 => ()
+test: (7, 7, 7), 0 => (0, 1, 2)
+test: (3, 9, 3, 9), 3 => (1, 3)
+pista: Recorre los índices con range(len(t)); en el if compara t[i] con el límite, y agrega a la tupla el índice i (no el elemento).
+pista: Completa la estructura.
+codigo:
+resultado = ()
+for i in range(len(t)):
+    if t[i] ___ limite:
+        resultado = resultado + (___,)
+return resultado

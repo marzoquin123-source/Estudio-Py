@@ -1,0 +1,384 @@
+@ 1-1
+def saludar(nombre):
+    return "Hola, " + nombre + "!"
+
+@ 1-2
+def datos_persona(nombre, edad, altura):
+    return (nombre, edad, altura)
+
+@ 1-3
+def a_binario(n):
+    return bin(n)
+
+@ 2-1
+def cuadrado_de_texto(texto):
+    numero = int(texto)
+    return numero ** 2
+
+@ 2-2
+def promedio_de_textos(a, b):
+    x = float(a)
+    y = float(b)
+    return (x + y) / 2
+
+@ 2-3
+def cantidad_unicos(t):
+    return len(set(t))
+
+@ 3-1
+def resumen_dias(dias):
+    semanas = dias // 7
+    sobrantes = dias % 7
+    return str(semanas) + " semanas y " + str(sobrantes) + " dias"
+
+@ 3-2
+def cuota_por_persona(total, personas):
+    total /= personas
+    return total
+
+@ 3-3
+def saldo_final(saldo, deposito, retiro):
+    saldo += deposito
+    saldo -= retiro
+    return saldo
+
+@ 4-1
+def es_mayor_de_edad(edad):
+    return edad >= 18
+
+@ 4-2
+def en_rango(n, minimo, maximo):
+    return n >= minimo and n <= maximo
+
+@ 4-3
+def una_sola_verdadera(a, b):
+    return (a or b) and not (a and b)
+
+@ 5-1
+def comparaciones(a, b):
+    return (a == b, a != b, a > b, a < b)
+
+@ 5-2
+def cociente_y_resto(a, b):
+    return (a // b, a % b)
+
+@ 5-3
+def analizar_numero(n):
+    return (n % 2 == 0, n > 0, n % 3 == 0 or n % 5 == 0)
+
+@ 6-1
+def limpiar_nombre(texto):
+    return texto.strip().title()
+
+@ 6-2
+def normalizar_correo(correo):
+    return correo.strip().lower()
+
+@ 6-3
+def separar_por_comas(texto):
+    return texto.upper().split(",")
+
+@ 7-1
+def posicion_de(texto, letra):
+    return texto.find(letra)
+
+@ 7-2
+def veces_que_aparece(texto, trozo):
+    return texto.lower().count(trozo.lower())
+
+@ 7-3
+def posicion_de_la_coma(texto):
+    return texto.index(",")
+
+@ 8-1
+def censurar(texto, palabra):
+    return texto.replace(palabra, "***")
+
+@ 8-2
+def clave_valida(clave):
+    return len(clave) >= 6 and clave.isalnum()
+
+@ 8-3
+def analizar_texto(texto):
+    return (texto.isalpha(), texto.isdigit(), texto.isspace(), texto.islower(), texto.isupper())
+
+@ 9-1
+def agregar_elemento(conjunto, x):
+    conjunto.add(x)
+    return conjunto
+
+@ 9-2
+def quitar_elemento(conjunto, x):
+    conjunto.remove(x)
+    return conjunto
+
+@ 9-3
+def quitar_si_existe(conjunto, x):
+    conjunto.discard(x)
+    return conjunto
+
+@ 10-1
+def relacion_de_conjuntos(a, b):
+    return (a.issubset(b), a.issuperset(b))
+
+@ 10-2
+def union_menos_uno(a, b):
+    u = a.union(b)
+    u.pop()
+    return len(u)
+
+@ 10-3
+def solo_en_el_primero(a, b):
+    return a.difference(b)
+
+@ 11-1
+def signo(n):
+    if n > 0:
+        return "positivo"
+    elif n < 0:
+        return "negativo"
+    else:
+        return "cero"
+
+@ 11-2
+def clasificar_nota(nota):
+    if nota >= 90:
+        return "A"
+    elif nota >= 80:
+        return "B"
+    elif nota >= 70:
+        return "C"
+    else:
+        return "D"
+
+@ 11-3
+def es_bisiesto(anio):
+    if anio % 400 == 0:
+        return True
+    elif anio % 100 == 0:
+        return False
+    elif anio % 4 == 0:
+        return True
+    else:
+        return False
+
+@ 12-1
+def puntos_del_numero(n):
+    puntos = 0
+    if n > 0:
+        puntos += 1
+    if n % 2 == 0:
+        puntos += 2
+    if n > 100:
+        puntos += 4
+    return puntos
+
+@ 12-2
+def etiqueta_temperatura(t):
+    if t >= 30:
+        return "calor"
+    elif t >= 20:
+        return "agradable"
+    elif t >= 10:
+        return "fresco"
+    else:
+        return "frio"
+
+@ 12-3
+def fizzbuzz(n):
+    if n % 15 == 0:
+        return "FizzBuzz"
+    elif n % 3 == 0:
+        return "Fizz"
+    elif n % 5 == 0:
+        return "Buzz"
+    else:
+        return str(n)
+
+@ 13-1
+def suma_hasta(n):
+    i = 1
+    total = 0
+    while i <= n:
+        total += i
+        i += 1
+    return total
+
+@ 13-2
+def veces_entre_dos(n):
+    veces = 0
+    while n > 1:
+        n = n // 2
+        veces += 1
+    return veces
+
+@ 13-3
+def primer_multiplo_mayor(m, limite):
+    k = m
+    while k <= limite:
+        k += m
+    return k
+
+@ 14-1
+def suma_de_digitos(n):
+    total = 0
+    while n > 0:
+        total += n % 10
+        n = n // 10
+    return total
+
+@ 14-2
+def invertir_numero(n):
+    r = 0
+    while n > 0:
+        r = r * 10 + n % 10
+        n = n // 10
+    return r
+
+@ 14-3
+def meses_para_meta(ahorro, aporte, meta):
+    meses = 0
+    while ahorro < meta:
+        ahorro += aporte
+        meses += 1
+    return meses
+
+@ 15-1
+def suma_pares_hasta(n):
+    total = 0
+    for i in range(1, n + 1):
+        if i % 2 == 0:
+            total += i
+    return total
+
+@ 15-2
+def factorial(n):
+    producto = 1
+    for i in range(1, n + 1):
+        producto = producto * i
+    return producto
+
+@ 15-3
+def tabla_de_multiplicar(n):
+    resultado = ()
+    for i in range(1, 11):
+        resultado = resultado + (n * i,)
+    return resultado
+
+@ 16-1
+def contar_vocales(texto):
+    texto = texto.lower()
+    total = 0
+    for letra in texto:
+        if letra == "a" or letra == "e" or letra == "i" or letra == "o" or letra == "u":
+            total += 1
+    return total
+
+@ 16-2
+def invertir_texto(texto):
+    resultado = ""
+    for letra in texto:
+        resultado = letra + resultado
+    return resultado
+
+@ 16-3
+def solo_digitos(texto):
+    resultado = ""
+    for c in texto:
+        if c.isdigit():
+            resultado = resultado + c
+    return resultado
+
+@ 17-1
+def suma_por_indice(t):
+    total = 0
+    for i in range(len(t)):
+        total += t[i]
+    return total
+
+@ 17-2
+def duplicar_elementos(t):
+    resultado = ()
+    for i in range(len(t)):
+        resultado = resultado + (t[i] * 2,)
+    return resultado
+
+@ 17-3
+def posiciones_mayores(t, limite):
+    resultado = ()
+    for i in range(len(t)):
+        if t[i] > limite:
+            resultado = resultado + (i,)
+    return resultado
+
+@ 18-1
+def multiplicar_tres_tuplas(a, b, c):
+    resultado = ()
+    for i in range(4):
+        resultado = resultado + (a[i] * b[i] * c[i],)
+    return resultado
+
+@ 18-2
+def sumar_dos_primeras(a, b, c):
+    resultado = ()
+    for i in range(2):
+        resultado = resultado + (a[i] + b[i] + c[i],)
+    return resultado
+
+@ 18-3
+def producto_de_la_tercera(a, b, c):
+    resultado = 0
+    for i in range(4):
+        if i == 2:
+            resultado = a[i] * b[i] * c[i]
+    return resultado
+
+@ 19-1
+def total_de_productos(a, b, c):
+    total = 0
+    for i in range(4):
+        total += a[i] * b[i] * c[i]
+    return total
+
+@ 19-2
+def mayor_por_posicion(a, b, c):
+    resultado = ()
+    for i in range(4):
+        mayor = a[i]
+        if b[i] > mayor:
+            mayor = b[i]
+        if c[i] > mayor:
+            mayor = c[i]
+        resultado = resultado + (mayor,)
+    return resultado
+
+@ 19-3
+def promedios_mayores_a_cinco(a, b, c):
+    resultado = ()
+    for i in range(4):
+        promedio = (a[i] + b[i] + c[i]) / 3
+        if promedio > 5:
+            resultado = resultado + (promedio,)
+    return resultado
+
+@ 20-1
+def sumas_sin_repetir(a, b, c):
+    resultado = set()
+    for i in range(4):
+        resultado.add(a[i] + b[i] + c[i])
+    return resultado
+
+@ 20-2
+def restas_en_texto(a, b, c):
+    resultado = []
+    for i in range(4):
+        resultado = resultado + [str(a[i] - b[i] - c[i])]
+    return ",".join(resultado)
+
+@ 20-3
+def nombres_completos(a, b, c):
+    resultado = ()
+    for i in range(4):
+        frase = a[i].strip() + " " + b[i].strip() + " " + c[i].strip()
+        resultado = resultado + (frase.title(),)
+    return resultado

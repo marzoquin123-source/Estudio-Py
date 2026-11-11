@@ -1,0 +1,248 @@
+@ 6-1 | limpiar_nombre | texto
+desc:
+Crear una función que reciba un nombre con espacios sobrantes al inicio o al
+final y retorne el nombre limpio, con la primera letra de cada palabra en
+mayúscula.
+demo:
+print(limpiar_nombre("  maria perez "))
+salida:
+Maria Perez
+test: "JUAN LOPEZ" => "Juan Lopez"
+test: "   ana" => "Ana"
+test: "luis  " => "Luis"
+pista: strip() quita los espacios del inicio y del final; title() pone en mayúscula la primera letra de cada palabra.
+pista: Los métodos de str no modifican el texto original: retornan un texto nuevo. Puedes encadenar uno detrás de otro.
+codigo:
+return texto.___().___()
+
+@ 6-2 | normalizar_correo | correo
+desc:
+Crear una función que reciba un correo electrónico y retorne el correo sin
+espacios al inicio ni al final y todo en minúsculas.
+demo:
+print(normalizar_correo("  Ana@Gmail.COM "))
+salida:
+ana@gmail.com
+test: "LUIS@X.ORG" => "luis@x.org"
+test: " a@b.c" => "a@b.c"
+test: "Pedro@Correo.Com   " => "pedro@correo.com"
+pista: Necesitas quitar espacios (strip) y pasar a minúsculas (lower).
+pista: Encadena los dos métodos y retorna el resultado.
+codigo:
+return correo.___().___()
+
+@ 6-3 | separar_por_comas | texto
+desc:
+Crear una función que reciba un texto con elementos separados por comas
+(sin espacios) y retorne una lista con cada elemento en mayúsculas.
+demo:
+print(separar_por_comas("pan,leche,huevos"))
+salida:
+['PAN', 'LECHE', 'HUEVOS']
+test: "a" => ["A"]
+test: "x,y" => ["X", "Y"]
+test: "uno,dos,tres,cuatro" => ["UNO", "DOS", "TRES", "CUATRO"]
+pista: split(",") parte un texto en una lista usando la coma como separador.
+pista: Pasa primero todo el texto a mayúsculas con upper() y luego aplica split(",").
+codigo:
+return texto.___().split(___)
+
+@ 7-1 | posicion_de | texto, letra
+desc:
+Crear una función que reciba un texto y una letra, y retorne la posición
+(índice) de la primera vez que aparece la letra. Si no aparece, retorna -1.
+demo:
+print(posicion_de("python", "t"))
+salida:
+2
+test: "python", "z" => -1
+test: "banana", "a" => 1
+test: "hola", "h" => 0
+pista: find() retorna la posición de la primera aparición; las posiciones empiezan en 0.
+pista: Si no encuentra el texto, find() retorna -1, así que no necesitas ningún if.
+codigo:
+return texto.___(letra)
+
+@ 7-2 | veces_que_aparece | texto, trozo
+desc:
+Crear una función que reciba un texto y un trozo de texto, y retorne cuántas
+veces aparece el trozo en el texto sin importar mayúsculas o minúsculas.
+demo:
+print(veces_que_aparece("Banana", "a"))
+salida:
+3
+test: "Hola Hola", "hola" => 2
+test: "python", "z" => 0
+test: "AaAa", "a" => 4
+pista: count() cuenta cuántas veces aparece un texto dentro de otro.
+pista: Para Python "A" y "a" son distintas: pasa los dos textos a minúsculas con lower() antes de contar.
+codigo:
+return texto.___().count(trozo.___())
+
+@ 7-3 | posicion_de_la_coma | texto
+desc:
+Crear una función que reciba un texto que siempre contiene al menos una
+coma y retorne la posición de la primera coma. Usa el método index.
+demo:
+print(posicion_de_la_coma("hola, mundo"))
+salida:
+4
+test: "a,b" => 1
+test: ",x" => 0
+test: "uno dos, tres" => 7
+pista: index() funciona como find(), pero da error si el texto no existe. Aquí siempre habrá una coma.
+pista: Busca la coma con index() y retorna el resultado.
+codigo:
+return texto.___(",")
+
+@ 8-1 | censurar | texto, palabra
+desc:
+Crear una función que reciba un texto y una palabra, y retorne el texto con
+todas las apariciones de la palabra cambiadas por "***".
+demo:
+print(censurar("el examen es facil", "facil"))
+salida:
+el examen es ***
+test: "no hay nada", "xyz" => "no hay nada"
+test: "ja ja ja", "ja" => "*** *** ***"
+test: "tonto y tonto", "tonto" => "*** y ***"
+pista: replace(viejo, nuevo) retorna un texto nuevo con todas las apariciones de viejo cambiadas por nuevo.
+pista: El texto nuevo siempre es "***". Retorna el resultado de replace.
+codigo:
+return texto.___(palabra, "___")
+
+@ 8-2 | clave_valida | clave
+desc:
+Crear una función que reciba una clave y retorne True si tiene al menos 6
+caracteres y solo contiene letras y números (sin espacios ni símbolos).
+demo:
+print(clave_valida("python3"))
+salida:
+True
+test: "abc" => False
+test: "abc 123" => False
+test: "Perro_77" => False
+test: "123456" => True
+pista: Hay dos condiciones: la longitud (len) y que solo tenga letras y números (isalnum()).
+pista: Une las dos condiciones con and y retorna el resultado.
+codigo:
+return len(clave) ___ 6 ___ clave.___()
+
+@ 8-3 | analizar_texto | texto
+desc:
+Crear una función que reciba un texto y retorne una tupla de 5 bool con el
+resultado de: isalpha, isdigit, isspace, islower, isupper (en ese orden).
+demo:
+print(analizar_texto("hola"))
+salida:
+(True, False, False, True, False)
+test: "ABC" => (True, False, False, False, True)
+test: "123" => (False, True, False, False, False)
+test: "   " => (False, False, True, False, False)
+test: "Hola1" => (False, False, False, False, False)
+pista: Retorna una tupla con cinco resultados; cada uno sale de un método de texto que empieza con "is".
+pista: El orden es: isalpha(), isdigit(), isspace(), islower(), isupper().
+codigo:
+return (texto.___(), texto.___(), texto.___(), ___, ___)
+
+@ 9-1 | agregar_elemento | conjunto, x
+desc:
+Crear una función que reciba un conjunto y un elemento, agregue el elemento
+al conjunto y retorne el conjunto.
+demo:
+print(agregar_elemento({1, 2, 3}, 4))
+salida:
+{1, 2, 3, 4}
+test: {1, 2}, 2 => {1, 2}
+test: set(), 5 => {5}
+test: {"a"}, "b" => {"a", "b"}
+pista: add() agrega un elemento a un conjunto. Ojo: modifica el conjunto y no retorna nada (si retornas conjunto.add(x) obtienes None).
+pista: Llama a add() en una línea y en la siguiente retorna el conjunto.
+codigo:
+conjunto.___(x)
+return ___
+
+@ 9-2 | quitar_elemento | conjunto, x
+desc:
+Crear una función que reciba un conjunto y un elemento que siempre está en el
+conjunto, quite el elemento y retorne el conjunto.
+demo:
+print(quitar_elemento({1, 2, 3}, 2))
+salida:
+{1, 3}
+test: {"a", "b"}, "a" => {"b"}
+test: {5}, 5 => set()
+test: {10, 20, 30, 40}, 40 => {10, 20, 30}
+pista: remove() quita un elemento del conjunto (y da error si no está). Modifica el conjunto y no retorna nada.
+pista: Llama a remove() en una línea y retorna el conjunto en la siguiente.
+codigo:
+conjunto.___(x)
+return ___
+
+@ 9-3 | quitar_si_existe | conjunto, x
+desc:
+Crear una función que reciba un conjunto y un elemento que puede estar o no en
+el conjunto. Si está, debe quitarlo; si no está, no pasa nada. Retorna el
+conjunto.
+demo:
+print(quitar_si_existe({1, 2, 3}, 9))
+salida:
+{1, 2, 3}
+test: {1, 2, 3}, 2 => {1, 3}
+test: set(), 1 => set()
+test: {"x", "y"}, "z" => {"x", "y"}
+pista: discard() quita el elemento si existe y no da error si no existe (a diferencia de remove()).
+pista: Llama a discard() y retorna el conjunto.
+codigo:
+conjunto.___(x)
+return ___
+
+@ 10-1 | relacion_de_conjuntos | a, b
+desc:
+Crear una función que reciba dos conjuntos y retorne una tupla de 2 bool:
+si a es subconjunto de b y si a es superconjunto de b (en ese orden).
+demo:
+print(relacion_de_conjuntos({1, 2}, {1, 2, 3}))
+salida:
+(True, False)
+test: {1, 2, 3}, {1, 2} => (False, True)
+test: {1, 2}, {1, 2} => (True, True)
+test: {1, 5}, {2, 3} => (False, False)
+pista: issubset() pregunta si todos los elementos de un conjunto están en otro; issuperset() pregunta lo contrario.
+pista: Retorna una tupla con a.issubset(b) y a.issuperset(b).
+codigo:
+return (a.___(b), a.___(b))
+
+@ 10-2 | union_menos_uno | a, b
+desc:
+Crear una función que reciba dos conjuntos, los una, saque un elemento
+cualquiera con pop() y retorne cuántos elementos quedaron.
+demo:
+print(union_menos_uno({1, 2, 3}, {3, 4}))
+salida:
+3
+test: {1}, {1} => 0
+test: {1, 2}, {3, 4, 5} => 4
+test: {7, 8}, {8, 9} => 2
+pista: union() junta dos conjuntos sin repetir y retorna un conjunto nuevo; pop() saca un elemento cualquiera del conjunto (lo modifica).
+pista: Guarda la unión en una variable, aplícale pop() y retorna len() de esa variable.
+codigo:
+u = a.___(b)
+u.___()
+return ___(u)
+
+@ 10-3 | solo_en_el_primero | a, b
+desc:
+Crear una función que reciba dos conjuntos y retorne un conjunto con los
+elementos que están en el primero pero no en el segundo.
+demo:
+print(solo_en_el_primero({1, 2, 3, 4}, {3, 4, 5}))
+salida:
+{1, 2}
+test: {1, 2}, {1, 2} => set()
+test: {"x", "y"}, {"z"} => {"x", "y"}
+test: {5, 6, 7}, set() => {5, 6, 7}
+pista: difference() retorna los elementos de un conjunto que no están en otro.
+pista: Retorna a.difference(b). Cuidado: el orden importa.
+codigo:
+return a.___(___)

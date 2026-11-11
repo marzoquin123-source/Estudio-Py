@@ -1,0 +1,251 @@
+@ 1-1 | saludar | nombre
+desc:
+Crear una función que reciba un nombre (str) y retorne el saludo
+"Hola, <nombre>!".
+demo:
+print(saludar("Ana"))
+salida:
+Hola, Ana!
+test: "Ana" => "Hola, Ana!"
+test: "Luis" => "Hola, Luis!"
+test: "" => "Hola, !"
+pista: Los textos (str) se pueden unir con el operador +.
+pista: Une tres partes: el texto "Hola, ", la variable nombre y el texto "!".
+codigo:
+return "Hola, " + ___ + "___"
+
+@ 1-2 | datos_persona | nombre, edad, altura
+desc:
+Crear una función que reciba el nombre (str), la edad (int) y la altura
+(float) de una persona, y retorne una tupla con los tres datos en ese orden.
+demo:
+print(datos_persona("Ana", 19, 1.65))
+salida:
+('Ana', 19, 1.65)
+test: "Luis", 20, 1.8 => ("Luis", 20, 1.8)
+test: "Eva", 31, 1.7 => ("Eva", 31, 1.7)
+test: "", 0, 0.0 => ("", 0, 0.0)
+pista: Una tupla se escribe con paréntesis y comas: (1, 2, 3).
+pista: Retorna una tupla con los tres parámetros, en el mismo orden en que llegan.
+codigo:
+return (___, ___, ___)
+
+@ 1-3 | a_binario | n
+desc:
+Crear una función que reciba un número entero y retorne su representación
+binaria (un str que empieza por 0b).
+demo:
+print(a_binario(5))
+salida:
+0b101
+test: 10 => "0b1010"
+test: 0 => "0b0"
+test: 255 => "0b11111111"
+pista: Python ya trae una función que convierte un entero a binario: bin().
+pista: bin(n) retorna un texto como "0b101". Solo hay que retornarlo.
+codigo:
+return ___(n)
+
+@ 2-1 | cuadrado_de_texto | texto
+desc:
+Crear una función que reciba un número escrito como texto (str) y retorne
+su cuadrado como entero.
+demo:
+print(cuadrado_de_texto("7"))
+salida:
+49
+test: "12" => 144
+test: "0" => 0
+test: "-3" => 9
+pista: Con el texto "7" no se puede operar: primero hay que convertirlo a número con int().
+pista: Convierte el texto a entero y luego elévalo al cuadrado con el operador **.
+codigo:
+numero = int(___)
+return numero ** ___
+
+@ 2-2 | promedio_de_textos | a, b
+desc:
+Crear una función que reciba dos números escritos como texto (str, pueden
+tener decimales) y retorne su promedio como número decimal.
+demo:
+print(promedio_de_textos("7.5", "8.5"))
+salida:
+8.0
+test: "4", "5" => 4.5
+test: "0", "0" => 0.0
+test: "10", "2.5" => 6.25
+pista: Convierte los dos textos a número con float() antes de operar.
+pista: El promedio es la suma de los dos números dividida entre 2 (usa /).
+codigo:
+x = float(a)
+y = float(___)
+return (x + y) / ___
+
+@ 2-3 | cantidad_unicos | t
+desc:
+Crear una función que reciba una tupla y retorne cuántos elementos
+distintos tiene (sin contar los repetidos).
+demo:
+print(cantidad_unicos((1, 2, 2, 3, 3, 3)))
+salida:
+3
+test: (4, 4, 4) => 1
+test: ("a", "b", "a") => 2
+test: () => 0
+test: (5, 6, 7, 8) => 4
+pista: Un conjunto (set) no guarda elementos repetidos.
+pista: Convierte la tupla en conjunto con set() y cuenta sus elementos con len().
+codigo:
+return len(___(t))
+
+@ 3-1 | resumen_dias | dias
+desc:
+Crear una función que reciba una cantidad de días y retorne un texto con
+las semanas completas y los días que sobran, con el formato
+"<semanas> semanas y <dias> dias".
+demo:
+print(resumen_dias(30))
+salida:
+4 semanas y 2 dias
+test: 7 => "1 semanas y 0 dias"
+test: 3 => "0 semanas y 3 dias"
+test: 100 => "14 semanas y 2 dias"
+pista: Las semanas completas se obtienen con la división entera // y lo que sobra con el residuo %.
+pista: Calcula semanas = dias // 7 y sobrantes = dias % 7. Luego arma el texto convirtiendo los números con str().
+codigo:
+semanas = dias // ___
+sobrantes = dias % ___
+return str(___) + " semanas y " + str(___) + " dias"
+
+@ 3-2 | cuota_por_persona | total, personas
+desc:
+Crear una función que reciba el total de una cuenta y el número de personas,
+y retorne cuánto paga cada una. Usa el operador de asignación /=.
+demo:
+print(cuota_por_persona(100, 4))
+salida:
+25.0
+test: 90, 3 => 30.0
+test: 50, 8 => 6.25
+test: 10, 4 => 2.5
+pista: El operador /= divide una variable entre un valor y guarda el resultado en la misma variable.
+pista: Divide total entre personas con /= y retorna total.
+codigo:
+total /= ___
+return ___
+
+@ 3-3 | saldo_final | saldo, deposito, retiro
+desc:
+Crear una función que reciba un saldo, un depósito y un retiro, y retorne el
+saldo final. Usa los operadores de asignación += y -=.
+demo:
+print(saldo_final(100, 50, 30))
+salida:
+120
+test: 0, 20, 5 => 15
+test: 10, 0, 10 => 0
+test: 500, 250, 100 => 650
+pista: saldo += x suma x a saldo; saldo -= x se lo resta.
+pista: Primero suma el depósito, después resta el retiro y retorna el saldo.
+codigo:
+saldo += ___
+saldo -= ___
+return ___
+
+@ 4-1 | es_mayor_de_edad | edad
+desc:
+Crear una función que reciba una edad y retorne True si la persona tiene
+18 años o más, y False en caso contrario.
+demo:
+print(es_mayor_de_edad(20))
+salida:
+True
+test: 17 => False
+test: 18 => True
+test: 0 => False
+pista: Un operador relacional (>, <, >=, ...) produce un valor bool: True o False.
+pista: Retorna directamente la comparación; no necesitas if.
+codigo:
+return edad ___ 18
+
+@ 4-2 | en_rango | n, minimo, maximo
+desc:
+Crear una función que reciba un número n, un mínimo y un máximo, y retorne
+True si n está entre el mínimo y el máximo (incluyéndolos).
+demo:
+print(en_rango(5, 1, 10))
+salida:
+True
+test: 0, 1, 10 => False
+test: 10, 1, 10 => True
+test: 11, 1, 10 => False
+test: 1, 1, 10 => True
+pista: n está en el rango si cumple dos condiciones a la vez: no es menor que minimo y no es mayor que maximo.
+pista: Une las dos comparaciones con and y retorna el resultado.
+codigo:
+return n >= ___ and n ___ maximo
+
+@ 4-3 | una_sola_verdadera | a, b
+desc:
+Crear una función que reciba dos valores bool y retorne True solo si
+exactamente uno de los dos es True.
+demo:
+print(una_sola_verdadera(True, False))
+salida:
+True
+test: False, True => True
+test: True, True => False
+test: False, False => False
+pista: Piensa en dos condiciones: que al menos una sea verdadera (or) y que no lo sean las dos a la vez (not con and).
+pista: Combina las dos ideas con and.
+codigo:
+return (a ___ b) and ___ (a and b)
+
+@ 5-1 | comparaciones | a, b
+desc:
+Crear una función que reciba dos números y retorne una tupla de 4 bool con
+el resultado de: a == b, a != b, a > b, a < b (en ese orden).
+demo:
+print(comparaciones(3, 5))
+salida:
+(False, True, False, True)
+test: 4, 4 => (True, False, False, False)
+test: 9, 2 => (False, True, True, False)
+test: -1, 0 => (False, True, False, True)
+pista: Para retornar varios valores, ponlos dentro de una tupla separados por comas.
+pista: Los cuatro valores son el resultado de ==, !=, > y < entre a y b.
+codigo:
+return (a == b, ___, ___, ___)
+
+@ 5-2 | cociente_y_resto | a, b
+desc:
+Crear una función que reciba dos enteros y retorne una tupla con el
+cociente entero (a // b) y el resto (a % b).
+demo:
+print(cociente_y_resto(17, 5))
+salida:
+(3, 2)
+test: 20, 4 => (5, 0)
+test: 3, 7 => (0, 3)
+test: 100, 7 => (14, 2)
+pista: Retorna una tupla con dos resultados separados por coma.
+pista: El primero se calcula con // y el segundo con %.
+codigo:
+return (a ___ b, a ___ b)
+
+@ 5-3 | analizar_numero | n
+desc:
+Crear una función que reciba un número entero y retorne una tupla de 3 bool:
+si es par, si es positivo (mayor que 0) y si es múltiplo de 3 o de 5.
+demo:
+print(analizar_numero(10))
+salida:
+(True, True, True)
+test: 7 => (False, True, False)
+test: -9 => (False, False, True)
+test: 0 => (True, False, True)
+test: 8 => (True, True, False)
+pista: Cada elemento de la tupla es una condición distinta. Un número es múltiplo de otro si el resto de dividirlo es 0.
+pista: Par: n % 2 == 0. Positivo: n > 0. Múltiplo de 3 o de 5: dos comparaciones con % unidas por or.
+codigo:
+return (n % 2 == 0, n ___ 0, n % 3 == 0 ___ n % 5 == ___)

@@ -1,0 +1,189 @@
+@ 18-1 | multiplicar_tres_tuplas | a, b, c
+desc:
+Crear una función que reciba tres tuplas de 4 elementos y retorne
+una tupla con la multiplicación de los elementos de la misma posición.
+demo:
+print(multiplicar_tres_tuplas((2, 5, 3, 4), (3, 2, 6, 1), (4, 1, 2, 5)))
+salida:
+(24, 10, 36, 20)
+test: (1, 1, 1, 1), (2, 2, 2, 2), (3, 3, 3, 3) => (6, 6, 6, 6)
+test: (0, 5, 2, 7), (9, 3, 1, 0), (1, 2, 3, 4) => (0, 30, 6, 0)
+test: (-1, 2, -3, 4), (2, 2, 2, 2), (1, -1, 1, -1) => (-2, -4, -6, -8)
+pista: Las tuplas tienen 4 elementos: recorre las posiciones 0, 1, 2 y 3 con un for sobre range(4).
+pista: En cada vuelta multiplica a[i] * b[i] * c[i] y agrégalo a una tupla resultado que empieza vacía: resultado = resultado + (valor,).
+codigo:
+resultado = ()
+for i in range(___):
+    resultado = resultado + (a[i] * ___ * ___,)
+return ___
+
+@ 18-2 | sumar_dos_primeras | a, b, c
+desc:
+Crear una función que reciba tres tuplas de 4 elementos y retorne una tupla
+de 2 elementos con la suma de los elementos de la misma posición, solo para
+las dos primeras posiciones (índices 0 y 1).
+demo:
+print(sumar_dos_primeras((1, 2, 3, 4), (5, 6, 7, 8), (9, 10, 11, 12)))
+salida:
+(15, 18)
+test: (0, 0, 9, 9), (0, 0, 9, 9), (0, 0, 9, 9) => (0, 0)
+test: (2, 5, 3, 4), (3, 2, 6, 1), (4, 1, 2, 5) => (9, 8)
+test: (-5, 5, 0, 0), (5, -5, 0, 0), (1, 1, 1, 1) => (1, 1)
+pista: Solo interesan las posiciones 0 y 1, así que el for recorre range(2) en lugar de range(4).
+pista: Suma a[i] + b[i] + c[i] y agrégalo a la tupla resultado.
+codigo:
+resultado = ()
+for i in range(___):
+    resultado = resultado + (a[i] + ___ + ___,)
+return ___
+
+@ 18-3 | producto_de_la_tercera | a, b, c
+desc:
+Crear una función que reciba tres tuplas de 4 elementos y retorne el producto
+de los elementos de la tercera posición (índice 2) de las tres tuplas.
+Usa un for sobre las posiciones y trabaja solo con la posición 2.
+demo:
+print(producto_de_la_tercera((2, 5, 3, 4), (3, 2, 6, 1), (4, 1, 2, 5)))
+salida:
+36
+test: (9, 9, 1, 9), (9, 9, 2, 9), (9, 9, 3, 9) => 6
+test: (1, 1, 0, 1), (5, 5, 5, 5), (7, 7, 7, 7) => 0
+test: (1, 1, -2, 1), (1, 1, 5, 1), (1, 1, 3, 1) => -30
+pista: La tercera posición es el índice 2, porque se empieza a contar desde 0.
+pista: Recorre las 4 posiciones con for i in range(4) y usa un if para actuar solo cuando i == 2.
+codigo:
+resultado = 0
+for i in range(4):
+    if i == ___:
+        resultado = a[i] * ___ * ___
+return ___
+
+@ 19-1 | total_de_productos | a, b, c
+desc:
+Crear una función que reciba tres tuplas de 4 elementos, multiplique los
+elementos de la misma posición y retorne la suma de esos cuatro productos
+(un solo número).
+demo:
+print(total_de_productos((2, 5, 3, 4), (3, 2, 6, 1), (4, 1, 2, 5)))
+salida:
+90
+test: (1, 1, 1, 1), (1, 1, 1, 1), (1, 1, 1, 1) => 4
+test: (0, 0, 0, 0), (1, 2, 3, 4), (5, 6, 7, 8) => 0
+test: (1, 2, 3, 4), (1, 2, 3, 4), (1, 1, 1, 1) => 30
+pista: Aquí no se arma una tupla sino un único total: una variable acumuladora que empieza en 0.
+pista: En cada vuelta suma al total el producto a[i] * b[i] * c[i].
+codigo:
+total = ___
+for i in range(___):
+    total += a[i] * ___ * ___
+return ___
+
+@ 19-2 | mayor_por_posicion | a, b, c
+desc:
+Crear una función que reciba tres tuplas de 4 elementos y retorne una tupla
+con el mayor de los tres elementos de cada posición.
+demo:
+print(mayor_por_posicion((2, 5, 3, 4), (3, 2, 6, 1), (4, 1, 2, 5)))
+salida:
+(4, 5, 6, 5)
+test: (1, 1, 1, 1), (1, 1, 1, 1), (1, 1, 1, 1) => (1, 1, 1, 1)
+test: (9, 0, 0, 0), (0, 9, 0, 0), (0, 0, 9, 0) => (9, 9, 9, 0)
+test: (-1, -5, -3, -9), (-2, -4, -6, -8), (-3, -3, -3, -7) => (-1, -3, -3, -7)
+pista: Para cada posición, supón que el mayor es a[i] y compáralo con b[i] y con c[i].
+pista: Guarda el mayor en una variable. Si b[i] es más grande, cámbiala; haz lo mismo con c[i]. Usa dos if separados (no elif).
+codigo:
+resultado = ()
+for i in range(4):
+    mayor = a[i]
+    if b[i] ___ mayor:
+        mayor = ___
+    if c[i] ___ mayor:
+        mayor = ___
+    resultado = resultado + (___,)
+return resultado
+
+@ 19-3 | promedios_mayores_a_cinco | a, b, c
+desc:
+Crear una función que reciba tres tuplas de 4 elementos, calcule el promedio
+de los elementos de la misma posición y retorne una tupla solo con los
+promedios que sean mayores que 5.
+demo:
+print(promedios_mayores_a_cinco((9, 2, 6, 3), (6, 4, 8, 3), (3, 3, 10, 6)))
+salida:
+(6.0, 8.0)
+test: (1, 1, 1, 1), (1, 1, 1, 1), (1, 1, 1, 1) => ()
+test: (5, 5, 5, 5), (5, 5, 5, 5), (5, 5, 5, 6) => (16 / 3,)
+test: (10, 0, 10, 0), (10, 0, 10, 0), (10, 3, 10, 3) => (10.0, 10.0)
+test: (12, 12, 12, 12), (0, 0, 0, 0), (3, 3, 3, 3) => ()
+pista: El promedio de una posición es (a[i] + b[i] + c[i]) / 3. Solo se agrega al resultado si es mayor que 5.
+pista: Calcula el promedio en una variable y usa un if para decidir si lo agregas a la tupla.
+codigo:
+resultado = ()
+for i in range(4):
+    promedio = (a[i] + ___ + ___) / ___
+    if promedio ___ 5:
+        resultado = resultado + (___,)
+return resultado
+
+@ 20-1 | sumas_sin_repetir | a, b, c
+desc:
+Crear una función que reciba tres tuplas de 4 elementos, sume los elementos
+de la misma posición y retorne un conjunto con esas sumas (sin repetidos).
+demo:
+print(sumas_sin_repetir((1, 2, 3, 4), (4, 3, 2, 1), (0, 0, 1, 1)))
+salida:
+{5, 6}
+test: (2, 5, 3, 4), (3, 2, 6, 1), (4, 1, 2, 5) => {8, 9, 10, 11}
+test: (1, 1, 1, 1), (1, 1, 1, 1), (1, 1, 1, 1) => {3}
+test: (0, 0, 0, 0), (0, 0, 0, 0), (0, 0, 0, 0) => {0}
+test: (1, 2, 3, 4), (4, 3, 2, 1), (0, 0, 0, 0) => {5}
+pista: Un conjunto (set) no guarda repetidos. Empieza con resultado = set() y agrega cada suma con add().
+pista: Completa la estructura. Recuerda que add() modifica el conjunto, no hay que reasignarlo.
+codigo:
+resultado = ___()
+for i in range(4):
+    resultado.___(a[i] + ___ + ___)
+return ___
+
+@ 20-2 | restas_en_texto | a, b, c
+desc:
+Crear una función que reciba tres tuplas de 4 elementos, calcule a[i] - b[i] - c[i]
+para cada posición y retorne un texto con los 4 resultados separados por comas
+(sin espacios).
+demo:
+print(restas_en_texto((10, 8, 6, 4), (1, 2, 3, 4), (1, 1, 1, 1)))
+salida:
+8,5,2,-1
+test: (0, 0, 0, 0), (0, 0, 0, 0), (0, 0, 0, 0) => "0,0,0,0"
+test: (5, 5, 5, 5), (1, 1, 1, 1), (1, 1, 1, 1) => "3,3,3,3"
+test: (1, 2, 3, 4), (4, 3, 2, 1), (0, 0, 0, 0) => "-3,-1,1,3"
+pista: join() solo une textos: convierte cada resta con str() y ve guardándolas en una lista que empieza vacía: resultado = resultado + [texto].
+pista: Al terminar el for, une la lista con la coma: ",".join(resultado).
+codigo:
+resultado = []
+for i in range(4):
+    resultado = resultado + [str(a[i] - ___ - ___)]
+return ",".___(resultado)
+
+@ 20-3 | nombres_completos | a, b, c
+desc:
+Crear una función que reciba tres tuplas de 4 textos: nombres, segundos nombres
+y apellidos (pueden traer espacios sobrantes y mayúsculas mezcladas). Retorna
+una tupla de 4 textos: el texto de cada posición une las tres palabras de esa
+posición, separadas por un espacio, sin espacios sobrantes y con la primera
+letra de cada palabra en mayúscula.
+demo:
+print(nombres_completos(("ana", "luis", "eva", "tomas"), (" maria ", "pedro", " sofia", "juan "), ("perez", "lopez", "diaz", "ruiz")))
+salida:
+('Ana Maria Perez', 'Luis Pedro Lopez', 'Eva Sofia Diaz', 'Tomas Juan Ruiz')
+test: (" ana", "luis ", "eva", "tomas"), ("maria", "pedro", "sofia", "juan"), ("PEREZ", "lopez", "DIAZ", "ruiz") => ("Ana Maria Perez", "Luis Pedro Lopez", "Eva Sofia Diaz", "Tomas Juan Ruiz")
+test: ("a", "b", "c", "d"), ("e", "f", "g", "h"), ("i", "j", "k", "l") => ("A E I", "B F J", "C G K", "D H L")
+test: ("  SAN  ", "x", "y", "z"), ("juan", "x", "y", "z"), ("de la cruz", "x", "y", "z") => ("San Juan De La Cruz", "X X X", "Y Y Y", "Z Z Z")
+pista: Para cada posición arma una frase: limpia cada palabra con strip(), únelas con espacios (+ " " +) y aplica title() al final.
+pista: Guarda la frase en una variable y agrega frase.title() a la tupla resultado.
+codigo:
+resultado = ()
+for i in range(4):
+    frase = a[i].___() + " " + b[i].___() + " " + c[i].___()
+    resultado = resultado + (frase.___(),)
+return resultado
