@@ -3,7 +3,7 @@ const CLAVES = new Set(['def', 'return', 'if', 'elif', 'else', 'for', 'while', '
 const CONSTANTES = new Set(['True', 'False', 'None'])
 const INTEGRADAS = new Set(['print', 'len', 'range', 'int', 'float', 'str', 'bool', 'tuple', 'set', 'bin', 'list'])
 
-const RE = /(#[^\n]*)|("(?:[^"\\n]|\.)*"?|'(?:[^'\\n]|\.)*'?)|(\b\d+(?:\.\d+)?\b)|([A-Za-z_]\w*)|(\s+|[\s\S])/g
+const RE = /(#[^\n]*)|("(?:[^"\\\n]|\\.)*"?|'(?:[^'\\\n]|\\.)*'?)|(\b\d+(?:\.\d+)?\b)|([A-Za-z_]\w*)|(\s+|[\s\S])/g
 
 /** Devuelve [{ t: texto, c: clase|'' }]; la unión de todos los t es exactamente el código original. */
 export function resaltar(codigo) {
