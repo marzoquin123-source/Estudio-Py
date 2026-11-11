@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Editor from './Editor.jsx'
 import { NIVELES, POR_ID, idsDeNivel } from './data/levels.js'
 import { diagnosticos, traducirError } from './errores.js'
@@ -12,6 +12,7 @@ import {
   rachaVisible,
   revelarPista,
   useEstado,
+  verSolucion,
   xpPorPistas,
 } from './store.js'
 import { Confeti, Confirmar, Stats, Texto } from './ui.jsx'
@@ -45,7 +46,7 @@ function Salida({ res }) {
   )
 }
 
-function Resultado({ r, ej, siguiente, xpGanado }) {
+function Resultado({ r, ej, siguiente, xpGanado, vioSol }) {
   if (!r) return null
   if (r.tipo === 'timeout')
     return (
@@ -90,7 +91,7 @@ function Resultado({ r, ej, siguiente, xpGanado }) {
       <>
         <div className="panel panel-bien">
           <h3>🎉 ¡Correcto! Pasaron las {total} pruebas</h3>
-          <p>{xpGanado > 0 ? `+${xpGanado} XP` : 'Ya habías resuelto este ejercicio, así que no suma XP de nuevo.'}</p>
+          <p>{xpGanado > 0 ? `+${xpGanado} XP` : vioSol ? 'Lo resolviste con la solución a la vista: no suma XP, pero cuenta para desbloquear el siguiente nivel.' : 'Ya habías resuelto este ejercicio, así que no suma XP de nuevo.'}</p>
           {siguiente}
         </div>
         <Salida res={res} />
@@ -171,9 +172,12 @@ export default function Ejercicio({ nivel, indice }) {
   const [xpGanado, setXpGanado] = useState(0)
   const [celebrar, setCelebrar] = useState(false)
   const [reiniciar, setReiniciar] = useState(false)
+  const [pedirSol, setPedirSol] = useState(false)
+  const [solucion, setSolucion] = useState(null)
 
   const pistasVistas = e.pistas[id] || 0
   const resuelto = !!e.resueltos[id]
+  const vioSol = !!e.vistas[id]
   const ids = idsDeNivel(nivel)
 
   const lineaError = r?.tipo === 'ok'
@@ -181,6 +185,11 @@ export default function Ejercicio({ nivel, indice }) {
       ? r.res.error?.linea
       : r.res.pruebas?.find((p) => !p.ok && p.error)?.error?.linea
     : null
+
+  useEffect(() => {
+    if (!vioSol) return
+    import('./data/soluciones.js').then((m) => setSolucion(m.default[id] || null))
+  }, [vioSol, id])
 
   function cambiar(texto) {
     setCodigo(texto)
@@ -259,12 +268,19 @@ export default function Ejercicio({ nivel, indice }) {
         <p>{ej.desc.join(' ')}</p>
       </section>
 
-      <Editor value={codigo} onChange={cambiar} errorLine={lineaError} onRun={correr} />
+      {vioSol && solucion && !resuelto && (
+        <section className="solucion">
+          <b>Solución · escríbela tú en el editor (el pegado está desactivado)</b>
+          <pre>{solucion}</pre>
+        </section>
+      )}
+
+      <Editor value={codigo} onChange={cambiar} errorLine={lineaError} onRun={correr} bloquearPegar={vioSol && !resuelto} />
 
       {estadoPy}
 
       <div className="resultado" aria-live="polite">
-        <Resultado r={r} ej={ej} siguiente={siguiente} xpGanado={xpGanado} />
+        <Resultado r={r} ej={ej} siguiente={siguiente} xpGanado={xpGanado} vioSol={vioSol} />
       </div>
 
       {pistasVistas > 0 && (
@@ -279,6 +295,12 @@ export default function Ejercicio({ nivel, indice }) {
             </div>
           ))}
         </section>
+      )}
+
+      {!resuelto && !vioSol && pistasVistas >= ej.pistas.length && (
+        <button className="btn-texto rendirse" onClick={() => setPedirSol(true)}>
+          No puedo: ver la solución y reescribirla
+        </button>
       )}
 
       <div className="acciones">
@@ -300,6 +322,23 @@ export default function Ejercicio({ nivel, indice }) {
           {corriendo ? 'Ejecutando…' : runner.estado !== 'listo' ? 'Cargando…' : '▶ Ejecutar'}
         </button>
       </div>
+
+      {pedirSol && (
+        <Confirmar
+          titulo="¿Ver la solución?"
+          texto="Verás una solución y el editor volverá al código inicial: tendrás que escribirla tú (no se puede pegar). Este ejercicio dará 0 XP."
+          si="Sí, mostrar"
+          no="Seguir intentando"
+          onNo={() => setPedirSol(false)}
+          onSi={() => {
+            verSolucion(id)
+            borrarCodigo(id)
+            setCodigo(ej.inicial)
+            setR(null)
+            setPedirSol(false)
+          }}
+        />
+      )}
 
       {reiniciar && (
         <Confirmar

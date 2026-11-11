@@ -4,7 +4,7 @@ import { idsDeNivel, NIVELES } from './data/levels.js'
 const KEY = 'pycamino:v1'
 const XP_POR_PISTAS = [10, 7, 5, 3]
 
-const vacio = () => ({ xp: 0, racha: { n: 0, ultimo: null }, resueltos: {}, codigo: {}, pistas: {} })
+const vacio = () => ({ xp: 0, racha: { n: 0, ultimo: null }, resueltos: {}, codigo: {}, pistas: {}, vistas: {} })
 
 function cargar() {
   try {
@@ -18,6 +18,7 @@ function cargar() {
       resueltos: d.resueltos || {},
       codigo: d.codigo || {},
       pistas: d.pistas || {},
+      vistas: d.vistas || {},
     }
   } catch {
     return vacio()
@@ -99,11 +100,17 @@ export function revelarPista(id, total) {
   emitir()
 }
 
+/** El estudiante pidió ver la solución: ese ejercicio ya no da XP. */
+export function verSolucion(id) {
+  estado = { ...estado, vistas: { ...estado.vistas, [id]: true } }
+  emitir()
+}
+
 /** Marca resuelto. Devuelve los XP ganados (0 si ya estaba resuelto). */
 export function marcarResuelto(id) {
   if (estado.resueltos[id]) return 0
   const pistas = estado.pistas[id] || 0
-  const xp = xpPorPistas(pistas)
+  const xp = estado.vistas[id] ? 0 : xpPorPistas(pistas)
   const h = hoy()
   let racha = estado.racha
   if (racha.ultimo !== h) racha = { n: racha.ultimo === ayer() ? racha.n + 1 : 1, ultimo: h }

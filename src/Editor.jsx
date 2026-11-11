@@ -2,7 +2,7 @@ import { useLayoutEffect, useRef } from 'react'
 
 const SIMBOLOS = ['Tab', ':', '(', ')', '[', ']', '{', '}', '"', ',', '=', '#']
 
-export default function Editor({ value, onChange, errorLine, onRun }) {
+export default function Editor({ value, onChange, errorLine, onRun, bloquearPegar }) {
   const ta = useRef(null)
   const lineas = value.split('\n').length
 
@@ -63,6 +63,8 @@ export default function Editor({ value, onChange, errorLine, onRun }) {
           value={value}
           onChange={(e) => onChange(e.target.value)}
           onKeyDown={onKeyDown}
+          onPaste={bloquearPegar ? (e) => e.preventDefault() : undefined}
+          onDrop={bloquearPegar ? (e) => e.preventDefault() : undefined}
           wrap="off"
           spellCheck={false}
           autoCapitalize="off"
