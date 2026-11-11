@@ -1,4 +1,5 @@
-import { useLayoutEffect, useRef } from 'react'
+import { useMemo, useRef } from 'react'
+import { resaltar } from './resaltar.js'
 
 const SIMBOLOS = ['Tab', ':', '(', ')', '[', ']', '{', '}', '"', ',', '=', '#']
 
@@ -6,12 +7,7 @@ export default function Editor({ value, onChange, errorLine, onRun, bloquearPega
   const ta = useRef(null)
   const lineas = value.split('\n').length
 
-  useLayoutEffect(() => {
-    const el = ta.current
-    if (!el) return
-    el.style.height = 'auto'
-    el.style.height = el.scrollHeight + 'px'
-  }, [value])
+  const tokens = useMemo(() => resaltar(value), [value])
 
   // execCommand mantiene el historial de deshacer; si no existe, se inserta a mano.
   function insertar(texto) {
@@ -58,21 +54,29 @@ export default function Editor({ value, onChange, errorLine, onRun, bloquearPega
             </div>
           ))}
         </div>
-        <textarea
-          ref={ta}
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-          onKeyDown={onKeyDown}
-          onPaste={bloquearPegar ? (e) => e.preventDefault() : undefined}
-          onDrop={bloquearPegar ? (e) => e.preventDefault() : undefined}
-          wrap="off"
-          spellCheck={false}
-          autoCapitalize="off"
-          autoCorrect="off"
-          autoComplete="off"
-          aria-label="Editor de código Python"
-          rows={lineas}
-        />
+        <div className="codigo">
+          <div className="codigo-in">
+            <pre className="resalte" aria-hidden="true">
+              {tokens.map((k, n) => (k.c ? <span key={n} className={k.c}>{k.t}</span> : k.t))}
+              {' '}
+            </pre>
+            <textarea
+              ref={ta}
+              value={value}
+              onChange={(e) => onChange(e.target.value)}
+              onKeyDown={onKeyDown}
+              onPaste={bloquearPegar ? (e) => e.preventDefault() : undefined}
+              onDrop={bloquearPegar ? (e) => e.preventDefault() : undefined}
+              wrap="off"
+              spellCheck={false}
+              autoCapitalize="off"
+              autoCorrect="off"
+              autoComplete="off"
+              aria-label="Editor de código Python"
+              rows={lineas}
+            />
+          </div>
+        </div>
       </div>
       <div className="simbolos" role="toolbar" aria-label="Símbolos rápidos">
         {SIMBOLOS.map((s) => (
