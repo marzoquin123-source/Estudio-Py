@@ -49,7 +49,7 @@ export function traducirError(err) {
     case 'EOFError':
       return ['No uses input()', 'Aquí los datos llegan por los parámetros de la función. Quita el input().']
     case 'KeyError':
-      return ['Elemento no encontrado en el conjunto', `Con ${C('remove()')} y ${C('pop()')} da error si el elemento no existe o el conjunto está vacío. Si el elemento puede no estar, usa ${C('discard()')}.`]
+      return ['Se buscó algo que no existe (KeyError)', `Dos causas comunes: (1) escribiste ${C('x = {}')} para crear un conjunto vacío, pero ${C('{}')} crea un diccionario; el conjunto vacío es ${C('set()')}. (2) Usaste ${C('remove()')} o ${C('pop()')} con un elemento que no está (o con el conjunto vacío); si puede no estar, usa ${C('discard()')}. Revisa también que no hayas reutilizado el nombre de un parámetro (por ejemplo ${C('a')}) para otra variable.`]
     case 'ValueError':
       if (/invalid literal for int/.test(msg)) return ['No se puede convertir ese texto a entero', `${C('int()')} solo acepta textos con dígitos (como "42"). Revisa qué texto le estás pasando.`]
       if (/could not convert string to float/.test(msg)) return ['No se puede convertir ese texto a decimal', `${C('float()')} solo acepta textos como "3.5".`]
